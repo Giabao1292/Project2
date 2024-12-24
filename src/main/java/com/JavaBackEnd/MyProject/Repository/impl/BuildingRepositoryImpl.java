@@ -1,25 +1,21 @@
 package com.JavaBackEnd.MyProject.Repository.impl;
 
-import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import org.springframework.boot.autoconfigure.web.reactive.ReactiveWebServerFactoryAutoConfiguration.BeanPostProcessorsRegistrar;
 import org.springframework.stereotype.Repository;
-import org.w3c.dom.ls.LSOutput;
 
 import com.JavaBackEnd.MyProject.DTO.BuildingRequestDTO;
 import com.JavaBackEnd.MyProject.Entity.BuildingEntity;
 import com.JavaBackEnd.MyProject.Repository.BuildingRepository;
 import com.JavaBackEnd.MyProject.Util.ConnectionJDBC;
 import com.JavaBackEnd.MyProject.Util.ModelMapperConvert;
+
 @Repository
 public class BuildingRepositoryImpl implements BuildingRepository {
 	public void JoinTable(BuildingRequestDTO buildingRequestDTO, StringBuilder sqlFindBuilding) {
@@ -93,7 +89,7 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 		queryAll(buildingRequestDTO, sqlFindBuilding);
 		queryRentType(buildingRequestDTO, sqlFindBuilding);
 		sqlFindBuilding.append(
-				"GROUP BY b.id, b.name, b.street, b.districtid, b.direction, b.level, b.ward, b.managerName, b.managerPhoneNumber, b.floorArea, b.rentPrice, b.numberOfBasement");
+				" GROUP BY b.id, b.name, b.street, b.districtid, b.direction, b.level, b.ward, b.managerName, b.managerPhoneNumber, b.floorArea, b.rentPrice, b.numberOfBasement");
 		List<BuildingEntity> listBuildingEntities = new ArrayList<BuildingEntity>();
 		try {
 			Statement statement = ConnectionJDBC.getConnection().createStatement();
