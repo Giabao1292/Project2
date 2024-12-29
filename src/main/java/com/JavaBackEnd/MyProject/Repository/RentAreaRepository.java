@@ -2,8 +2,12 @@ package com.JavaBackEnd.MyProject.Repository;
 
 import java.util.List;
 
-import com.JavaBackEnd.MyProject.DTO.BuildingRequestDTO;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RentAreaRepository {
-	public List<String> getAreaById(Long buildingId, BuildingRequestDTO buildingRequestDTO);
+import com.JavaBackEnd.MyProject.DTO.BuildingRequestDTO;
+import com.JavaBackEnd.MyProject.Entity.RentAreaEntity;
+import com.JavaBackEnd.MyProject.Repository.Custom.RentAreaRepositoryCustom;
+
+public interface RentAreaRepository extends JpaRepository<RentAreaEntity, Long>, RentAreaRepositoryCustom {
+	public String filterAreaList(List<RentAreaEntity> areaList, BuildingRequestDTO buildingRequestDTO);
 }

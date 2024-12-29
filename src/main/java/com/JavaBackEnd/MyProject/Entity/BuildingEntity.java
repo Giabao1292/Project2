@@ -1,28 +1,60 @@
 package com.JavaBackEnd.MyProject.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "building")
 public class BuildingEntity {
-	private String name, street, ward, direction, level, managerName, managerPhoneNumber;
-	private Long floorArea, rentPrice, districtId, numberOfBasement, buildingId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+	@Column(name = "name")
+	private String name;
+	@Column(name = "street")
+	private String street;
+	@Column(name = "ward")
+	private String ward;
+	@Column(name = "numberofbasement")
+	private Long numberOfBasement;
+	@Column(name = "floorarea")
+	private Long floorArea;
+	@Column(name = "rentprice")
+	private Long rentPrice;
+	@Column(name = "direction")
+	private String direction;
+	@Column(name = "level")
+	private String level;
+	@Column(name = "managername")
+	private String managerName;
+	@Column(name = "managerphonenumber")
+	private String managerPhoneNumber;
+	@ManyToOne
+	@JoinColumn(name = "districtid")
+	private DistrictEntity district;
+	@OneToMany(mappedBy = "building")
+	private List<RentAreaEntity> rentAreaEntities = new ArrayList<RentAreaEntity>();
 
 	public BuildingEntity() {
 	}
 
-	public BuildingEntity(String name, String street, String ward, String direction, String level, String managerName,
-			String managerPhoneNumber, Long floorArea, Long rentPrice, Long districtId, Long numberOfBasement,
-			Long buildingId) {
-		super();
-		this.name = name;
-		this.street = street;
-		this.ward = ward;
-		this.direction = direction;
-		this.level = level;
-		this.managerName = managerName;
-		this.managerPhoneNumber = managerPhoneNumber;
-		this.floorArea = floorArea;
-		this.rentPrice = rentPrice;
-		this.districtId = districtId;
-		this.numberOfBasement = numberOfBasement;
-		this.buildingId = buildingId;
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -47,6 +79,30 @@ public class BuildingEntity {
 
 	public void setWard(String ward) {
 		this.ward = ward;
+	}
+
+	public Long getNumberOfBasement() {
+		return numberOfBasement;
+	}
+
+	public void setNumberOfBasement(Long numberOfBasement) {
+		this.numberOfBasement = numberOfBasement;
+	}
+
+	public Long getFloorArea() {
+		return floorArea;
+	}
+
+	public void setFloorArea(Long floorArea) {
+		this.floorArea = floorArea;
+	}
+
+	public Long getRentPrice() {
+		return rentPrice;
+	}
+
+	public void setRentPrice(Long rentPrice) {
+		this.rentPrice = rentPrice;
 	}
 
 	public String getDirection() {
@@ -81,44 +137,20 @@ public class BuildingEntity {
 		this.managerPhoneNumber = managerPhoneNumber;
 	}
 
-	public Long getFloorArea() {
-		return floorArea;
+	public DistrictEntity getDistrict() {
+		return district;
 	}
 
-	public void setFloorArea(Long floorArea) {
-		this.floorArea = floorArea;
+	public void setDistrict(DistrictEntity district) {
+		this.district = district;
 	}
 
-	public Long getRentPrice() {
-		return rentPrice;
+	public List<RentAreaEntity> getRentAreaEntities() {
+		return rentAreaEntities;
 	}
 
-	public void setRentPrice(Long rentPrice) {
-		this.rentPrice = rentPrice;
-	}
-
-	public Long getDistrictId() {
-		return districtId;
-	}
-
-	public void setDistrictId(Long districtId) {
-		this.districtId = districtId;
-	}
-
-	public Long getNumberOfBasement() {
-		return numberOfBasement;
-	}
-
-	public void setNumberOfBasement(Long numberOfBasement) {
-		this.numberOfBasement = numberOfBasement;
-	}
-
-	public Long getBuildingId() {
-		return buildingId;
-	}
-
-	public void setBuildingId(Long buildingId) {
-		this.buildingId = buildingId;
+	public void setRentAreaEntities(List<RentAreaEntity> rentAreaEntities) {
+		this.rentAreaEntities = rentAreaEntities;
 	}
 
 }
